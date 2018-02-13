@@ -294,6 +294,8 @@ class VoyagerServiceProvider extends ServiceProvider
     protected function registerFormFields()
     {
         $formFields = [
+            'text',
+            'text_area',
             'checkbox',
             'color',
             'date',
@@ -308,8 +310,6 @@ class VoyagerServiceProvider extends ServiceProvider
             'markdown_editor',
             'select_dropdown',
             'select_multiple',
-            'text',
-            'text_area',
             'timestamp',
             'hidden',
             'coordinates',
