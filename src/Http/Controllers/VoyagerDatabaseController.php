@@ -100,8 +100,7 @@ class VoyagerDatabaseController extends Controller
 
             event(new TableAdded($table));
 
-            return redirect()
-               ->route('voyager.database.index')
+            return back()
                ->with($this->alertSuccess(__('voyager.database.success_create_table', ['table' => $table->name])));
         } catch (Exception $e) {
             return back()->with($this->alertException($e))->withInput();
@@ -120,8 +119,7 @@ class VoyagerDatabaseController extends Controller
         Voyager::canOrFail('browse_database');
 
         if (!SchemaManager::tableExists($table)) {
-            return redirect()
-                ->route('voyager.database.index')
+            return back()
                 ->with($this->alertError(__('voyager.database.edit_table_not_exist')));
         }
 
@@ -152,8 +150,7 @@ class VoyagerDatabaseController extends Controller
             return back()->with($this->alertException($e))->withInput();
         }
 
-        return redirect()
-               ->route('voyager.database.index')
+        return back()
                ->with($this->alertSuccess(__('voyager.database.success_create_table', ['table' => $table['name']])));
     }
 
@@ -243,8 +240,7 @@ class VoyagerDatabaseController extends Controller
             SchemaManager::dropTable($table);
             event(new TableDeleted($table));
 
-            return redirect()
-                ->route('voyager.database.index')
+            return back()
                 ->with($this->alertSuccess(__('voyager.database.success_delete_table', ['table' => $table])));
         } catch (Exception $e) {
             return back()->with($this->alertException($e));
@@ -302,9 +298,9 @@ class VoyagerDatabaseController extends Controller
                 event(new BreadAdded($dataType, $data));
             }
 
-            return redirect()->route('voyager.database.index')->with($data);
+            return back()->with($data);
         } catch (Exception $e) {
-            return redirect()->route('voyager.database.index')->with($this->alertException($e, 'Saving Failed'));
+            return back()->with($this->alertException($e, 'Saving Failed'));
         }
     }
 
@@ -347,7 +343,7 @@ class VoyagerDatabaseController extends Controller
             // Save translations if applied
             $dataType->saveTranslations($translations);
 
-            return redirect()->route('voyager.database.index')->with($data);
+            return back()->with($data);
         } catch (Exception $e) {
             return back()->with($this->alertException($e, __('voyager.generic.update_failed')));
         }
