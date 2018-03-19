@@ -19,6 +19,9 @@
             >
                 <i class="voyager-edit"></i> {{ __('voyager.generic.edit') }}
             </div>
+            <a href="{{ $item->link() }}" title=" {{ __('voyager.generic.browse') }}" class="btn btn-sm btn-warning pull-right">
+                <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm"> {{ __('voyager.generic.browse') }}</span>
+            </a>
         </div>
         <div class="dd-handle">
             @if($options->isModelTranslatable)
